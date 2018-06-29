@@ -1,15 +1,28 @@
-version: '3'
+version: '3.1'
+
 services:
 
-  db:
-    image: mysql:5.7
+  mongodb:
+    image: mongo
     ports:
-      - 3306:3306
-    environment:
-      - MYSQL_ROOT_PASSWORD=parola
+       - 27017:27017
+    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: pass
 
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+#    environment:
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: pass
 
-#  server:
-#    build: .
-#    ports:
-#      - 3000:3000
+  mysqldb:
+      image: mysql:5.7
+      ports:
+        - 3306:3306
+      environment:
+        - MYSQL_ROOT_PASSWORD=parola
